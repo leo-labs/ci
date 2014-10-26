@@ -1,94 +1,124 @@
 Perceptron<-function(path){
+  
   #Read File from Path as Matrix
   print("Intiliazing Matrix and Data please wait...")
-  exprs <-read.table(path)
+  trainingData <-as.matrix(read.table(path))
+  trainingWeightData <- trainingData[,-ncol(trainingData)]
+  
+  # Initialize Data for plotting
+  falseClassified  <- 0
+  truePositive <- 0
+  trueNegative <- 0
+  falsePositive <- 0
+  falseNegative <- 0
+  overallClassifications <- 0
+  rowOfTrainingElement <- 0
 
-
-  # Initialize Data for plotting tp = true positive , tn = true negative , fp = false positive , fn = false negative examples = number of repeats
-  t  <- 0
-  tp <- 0
-  tn <- 0
-  fp <- 0
-  fn <- 0
-  examples <- 0
-  x <- 0
+  #Arrays for gathering Recall and Precision Values
+  recallValues <- c()
+  precisionValues <- c()
   
-  #Intitialize gatthering of precision and recall data for every reapat in accessablle arrays
-  recall <- c()
-  precision <- c()
-  #Break Condition - if x elements were correctly classified stop the algorithm
-  breaker <- 0
+  #Condition to stop the algorithm
+  breakCondition <- 0
+  breakConditionMax <- 0
   
-  #Choose random w0 weight to start the algorithm
-  w <- c(runif(1,-1,1),runif(1,-1,1))
+  ##########################################################################################
+  #Choose random weight to start the algorithm depending on the number of Colums of the Data
+  #Initially every element of weight has the same value, but that should not pose a problem
+  #There must be another way to instantiate an array with a dynamic number of elements
+  ##########################################################################################
   
+  weight <- rep(runif(1,-1,1),ncol(trainingWeightData))
   
     
-  print (paste0("Number of Rows ",nrow(exprs)))
-  print("Data Initializes begin learning of pattern...")
+  print (paste0("Number of Rows ",nrow(trainingData)))
+  print("Data initialized begin learning of pattern...")
+  
+ 
+  ##########################################################################################
+  #Implementiation of the Perceptron Learning Algorithm
+  #Choose an arbitrary rowOfTrainingElement in P u N 
+  #Check if correctly classified or not and take action respectively
+  ##########################################################################################
   repeat{
     
-    #choose arbitrary x in P u N  - might be better to just choose from 1:nrows(exprs) over and over
-    x <- sample(1:nrow(exprs),1)
-  
-   
     
+    rowOfTrainingElement <- sample(1:nrow(trainingWeightData),1)
     
       # Detect True Positive Values
-      if(exprs[x,3]== 1 && (w[1]*exprs[x,1]+w[2]*exprs[x,2] > 0)){
-        tp <- tp +1
-        breaker <- breaker + 1
+      if(trainingData[rowOfTrainingElement,ncol(trainingData)]== 1 && (sum(weight*trainingWeightData[rowOfTrainingElement,]) > 0)){
+        truePositive <- truePositive +1
+        breakCondition <- breakCondition + 1
       }
       
       #Detect True Negative Values
-      if(exprs[x,3]== 0 && (w[1]*exprs[x,1]+w[2]*exprs[x,2] <= 0)){
-        tn <- tn +1
-        breaker <- breaker + 1
+      if(trainingData[rowOfTrainingElement,ncol(trainingData)]== 0 && (sum(weight*trainingWeightData[rowOfTrainingElement,]) <= 0)){
+        trueNegative <- trueNegative +1
+        breakCondition <- breakCondition + 1
       }
       
       #Detect False Negative Values
-      if(exprs[x,3]== 1 && (w[1]*exprs[x,1]+w[2]*exprs[x,2] <= 0)){
-        fn <- fn +1
-        t <- t +1
-        w[1] = w[1] + exprs[x,1]
-        w[2] = w[2] + exprs[x,2]
-        breaker <- 0
+      if(trainingData[rowOfTrainingElement,ncol(trainingData)]== 1 && (sum(weight*trainingWeightData[rowOfTrainingElement,]) <= 0)){
+        falseNegative <- falseNegative +1
+        falseClassified <- falseClassified +1
+        weight <- weight + trainingWeightData[rowOfTrainingElement,]
+        breakCondition <- 0
       }
       
       #Detect False Positive Values
-      if(exprs[x,3]== 0 && (w[1]*exprs[x,1]+w[2]*exprs[x,2] > 0)){
-        fp <- fp +1
-        t <- t +1
-        w[1] = w[1] - exprs[x,1]
-        w[2] = w[2] - exprs[x,2]
-        breaker <- 0
+      if(trainingData[rowOfTrainingElement,ncol(trainingData)]== 0 && (sum(weight*trainingWeightData[rowOfTrainingElement,]) > 0)){
+        falsePositive <- falsePositive +1
+        falseClassified <- falseClassified +1
+        weight <- weight - trainingWeightData[rowOfTrainingElement,]
+        breakCondition <- 0
+
       }  
-    examples <- examples + 1
     
-    #Compute Precision and Recall
+    overallClassifications <- overallClassifications + 1
     
-    if(tp != 0 || fn != 0){
-      recall[examples] <- tp/(tp+fn)
+    ##########################################################################################
+    #Compute Precision and Recall values and store them in their respective arrays
+    #Recall = truePositive/(truePositive+falseNegative) 
+    #Precision = truePositive/(truePositive+falsePositive)
+    ##########################################################################################
+    
+    if(truePositive != 0 || falseNegative != 0){
+      recallValues[overallClassifications] <- truePositive/(truePositive+falseNegative)
     }else{
-      recall[examples]<- 0
+      recallValues[overallClassifications]<- 0
     }
-    if(tp != 0 || fp != 0){
-      precision[examples] <- tp/(tp+fp)
+    
+    if(truePositive != 0 || falsePositive != 0){
+      precisionValues[overallClassifications] <- truePositive/(truePositive+falsePositive)
     }else{
-      precision[examples] <- 0
+      precisionValues[overallClassifications] <- 0
     }
-    if(breaker == nrow(exprs)){break}
+     
+    ##########################################################################################
+    #Show Progress by printing number of consecutive correctly classified Examples
+    #Stop Algorithm if there are 500? consecutive correctly classified Examples
+    ##########################################################################################
+    
+    if(breakCondition > breakConditionMax){
+      breakConditionMax <- breakCondition
+      print(breakConditionMax)
+    }
+    
+    if(overallClassifications %% 25000 == 0){ print (paste0("Overall classified examples ",overallClassifications))}
+    if(breakCondition == nrow(trainingData)){break}
   }
   
-  print("Pattern learned ! Plotting Precision Recall Curve...")    
-
-  #convert the results to a matrix
-  recallres <- matrix(recall,nrow = examples,ncol = 1)
-  precisionres <- matrix(precision,nrow = examples,ncol = 1)
-  plot(recallres,precisionres)
+  ##########################################################################################
+  #Plot Precision Recall Curve and return P/R Matrix for further use
+  ##########################################################################################
   
-  #combine the matrix to a return value
-  result <- cbind(recallres,precisionres)
+  print("Pattern learned ! Plotting Precision Recall Curve...")    
+  
+  recallValueMatrix <- matrix(recallValues,nrow = overallClassifications,ncol = 1)
+  precisionValueMatrix <- matrix(precisionValues,nrow = overallClassifications,ncol = 1)
+  plot(recallValueMatrix , precisionValueMatrix , xlim=c(0,1) , ylim=c(0,1) , xlab = "Recall" , ylab = "Precision")
+  
+  result <- cbind(recallValueMatrix,precisionValueMatrix)
  
   return(result)
 }
