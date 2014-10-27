@@ -5,13 +5,36 @@
 \usepackage[utf8]{inputenc}
 
 \title{Submission Sheet 1}
-\author{Danny Heinrich \and Matze K. \and Leonard Kleinhans}
+\author{Danny Heinrich \and Matthias Kasperidus \and Leonard Kleinhans}
 \date{29. October 2014}
 
-\begin{document}
 
+
+\usepackage{amsmath}
+
+\newcommand*\colvec[2]{
+        \begin{pmatrix} #1 \\ #2 \end{pmatrix}
+}
+
+\begin{document}
 \maketitle
 
-\section{Introduction}
+\section{Exercise 1.2: Perceptron Classifier}
 
+Apparently the given quadrangle is convex. So one can calculate the weight vectors $\vec{w_1},\vec{w_2},\vec{w_3},\vec{w_4}$ by deriving the four hyper planes.
+It is easy to get the hyperplanes in the form $\vec{x} = \vec{p} + r \vec{q}$ with $\vec{x},\vec{p},\vec{q} \in R^2 ~r \in R$. This form is equivalent to the normalform $(\vec{x}-\vec{p})~\vec{n} = 0$ with normal vector $\vec{n}$, which can also be written as $\vec{x} ~ \vec{n} = \vec{p} ~ \vec{n}$ and is almost what we want. \\
+We now will calculate the four hyperplanes $H_{ab}$, $H_{bc}$, $H_{cd}$ and $H_{da}$ : \\
+\begin{align*}
+H_{ab}&: \vec{x} = \vec{a} + r (\vec{b}-\vec{a}) = \colvec{1}{1} + r \left(\colvec{2}{-2} - \colvec{1}{1}\right) = \colvec{1}{1} + r \colvec{-1}{-3} \\
+\Leftrightarrow H_{ab}&: 3x_1 + x_2 = 4 \text{~with~} \vec{n} = \vec{w_1} = \colvec{3}{1} \\
+H_{bc}&: \vec{x} = \vec{b} + r (\vec{c}-\vec{b}) = \colvec{2}{-2} + r \left(\colvec{0}{-1} - \colvec{2}{-2}\right) = \colvec{0}{-1} + r \colvec{-2}{1} \\
+\Leftrightarrow H_{bc}&: (-1) x_1 + (-2) x_2 = 2 \text{~with~} \vec{n} = \vec{w_2} = \colvec{-1}{-2}\\
+H_{cd}&: \vec{x} = \vec{c} + r (\vec{d}-\vec{c}) = \colvec{-1}{1} + r \left(\colvec{0}{-1} - \colvec{-1}{1}\right) = \colvec{-1}{1} + r \colvec{-1}{-2} \\
+\Leftrightarrow H_{cd}&: 2 x_1 + (-1) x_2 = -3 \text{~with~} \vec{n} = \vec{w_3} = \colvec{2}{-1}\\
+H_{da}&: \vec{x} = \vec{d} + r (\vec{a}-\vec{d}) = \colvec{-1}{1} + r \left(\colvec{1}{1} - \colvec{-1}{1}\right) = \colvec{-1}{1} + r \colvec{2}{0} \\
+\Leftrightarrow H_{da}&: 2 x_2 = 2 \text{~with~} \vec{n} = \vec{w_4} = \colvec{0}{2}\\
+\end{align*}
+
+
+\end{document}
 \end{document}
