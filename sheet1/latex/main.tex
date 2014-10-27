@@ -43,6 +43,14 @@ Because $(0,0)$ is inside the qudrangle, we can use that to get the inequalities
 2 x_2 &\le 2 \\
 \end{align*}
 
+\section{Exercise 1.3: Perceptron learning Algorithm}
+
+As on can see in fig. 3 to 5 the perceptron learning algorithm correctly classifies only the third data set displayed in fig. 5. 
+It shows that a singe layer perceptron learning algorithm can not classify every set correctly in such way that the algorithm terminates for given condition that every example must be classified correctly.
+In fig. 3 one can see that precision and recall are close to 1 meaning that nearly all examples are classified correctly. Only a few false classified examples remain. This leads to the conclusion that the seperating hyperplane for the whole set can not be constructed.
+A small error remains in every iteration of the algorithm. In fig. 4 the precision rate drops drastically compared to fig.3 and 5. which induces a greater error. Finally the algorithm managed to determinate a weight vector to seperate the whole data set.
+Since every example is correctly classified there are no more errors and thus precision and recall converge to 1.
+
 \section{Exercise 1.4: Classification into more than two classes}
 \begin{enumeration}
 \item On option could be, to train for $n$ classes $n$ ANN's: Every ANN classifies if the input is in class $n$ or not. -TODO \\
