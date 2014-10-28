@@ -96,7 +96,7 @@ perceptron<-function(path){
   return(result)
 }
   
-# helper funtion for 2-dem data sets
+# helper funtion for 2-Dim data sets
 dataPlot<-function(path){
   trainingData <- as.matrix(read.table(path))
   trainingWeightData <- trainingData[,-ncol(trainingData)]
