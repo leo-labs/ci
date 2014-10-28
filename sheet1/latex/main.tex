@@ -23,15 +23,15 @@
 
 \section{Exercise 1.1: McCulloch-Pitts Neural Net}
 \item a) A two layered McCulloch-Pitts Neural Net is sufficient to model the given boolean function $f(x) = \bar x_1 \bar x_2 \bar x_3 \vee  x_1 x_2 \vee x_2 x_3 $ . Each conjunction is modelled by a neuron, which only fires if all three
-inputs are active. The disjunction neuron fires as soon as one conjunction neuron fires. See Attachment 1
+inputs are active. The disjunction neuron fires as soon as one conjunction neuron fires. See Figure 4
 
 \item b) As seen in a) it is sufficient to use as two layered McCulloch-Pitts Neural Net to model the given boolean function g(x). 
-The $\wedge$ binds stronger than the $\vee$ and therefore $g(x)$ is equivalent to $g(x) = x_1 x_2_x_3 \vee  x_1 x_2 \bar x_4\vee x_1 x_4 \bar x_2 $. See Attachment 2
+The $\wedge$ binds stronger than the $\vee$ and therefore $g(x)$ is equivalent to $g(x) = x_1 x_2_x_3 \vee  x_1 x_2 \bar x_4\vee x_1 x_4 \bar x_2 $. See Figure 5
 
 \section{Exercise 1.2: Perceptron Classifier}
 
 Apparently the given quadrangle is convex. So one can calculate the weight vectors $\vec{w_1},\vec{w_2},\vec{w_3},\vec{w_4}$ by deriving the four hyper planes.
-It is easy to get the hyperplanes in the form $\vec{x} = \vec{p} + r \vec{q}$ with $\vec{x},\vec{p},\vec{q} \in R^2 ~r \in R$. This form is equivalent to the normalform $(\vec{x}-\vec{p})~\vec{n} = 0$ with normal vector $\vec{n}$, which can also be written as $\vec{x} ~ \vec{n} = \vec{p} ~ \vec{n}$ and is almost what we want. See Attachment 3 for the Quadrangle and Attachment 4 for the constructed net.\\
+It is easy to get the hyperplanes in the form $\vec{x} = \vec{p} + r \vec{q}$ with $\vec{x},\vec{p},\vec{q} \in R^2 ~r \in R$. This form is equivalent to the normalform $(\vec{x}-\vec{p})~\vec{n} = 0$ with normal vector $\vec{n}$, which can also be written as $\vec{x} ~ \vec{n} = \vec{p} ~ \vec{n}$ and is almost what we want. See Figure 6 for the Quadrangle and Figure 7 for the constructed net.\\
 We now will calculate the four hyperplanes $H_{ab}$, $H_{bc}$, $H_{cd}$ and $H_{da}$ : \\
 \begin{align*}
 H_{ab}&: \vec{x} = \vec{a} + r (\vec{b}-\vec{a}) = \colvec{1}{1} + r \left(\colvec{2}{-2} - \colvec{1}{1}\right) = \colvec{1}{1} + r \colvec{-1}{-3} \\
