@@ -60,6 +60,12 @@ In fig. 3 one can see that precision and recall are close to 1 meaning that near
 A small error remains in every iteration of the algorithm. In figure 2 the precision rate drops drastically compared to figure 1 and 3. which induces a greater error. Finally the algorithm managed to determinate a weight vector to seperate the whole data set.
 Since every example is correctly classified there are no more errors and thus precision and recall converge to 1.
 
+To run the code first import the function with R-Studio by using the source() function or running the code inside R-Studio. 
+After the function has been imported correctly it can be called in the R console taking 2 parameters. Perceptron(path,maxInit)
+One possible approach would be : 
+\item source("path/to/source/code/name.R)
+\item Perceptron("path/to/data/set1.txt",maxIterations) with maxIterations taking positive integers, respresenting the maximum iterations.
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.3]{PerceptronSet1.png}
@@ -88,11 +94,14 @@ Since every example is correctly classified there are no more errors and thus pr
 
 \section{Exercise 1.4: Classification into more than two classes}
 \begin{enumeration}
-\item On option could be, to train for $n$ classes $n$ ANN's: Every ANN classifies if the input is in class $n$ or not. Basically one would iterate over the power set of the classes and pick the set where the input is in all classes.
-Furthermore one would test if there is more than one set meeting this condition. The algorithm would return the set with the most classes in it.
+\item One option could be, to train for $N$ classes $n$ ANN's: Every ANN classifies if the input is in class $n \in N$ or not. Basically one would iterate over $\mathcal P \left({N}\right)$ in such way that $X \in \mathcal P \left({N}\right)$ contains all and only all classes which were correctly classified for a given input. Furthermore one would test if there is more than one set meeting this condition. The algorithm would return the set with the most classes in it.
 
-\item Another possibility is to use two layered perceptron classifiers to classify the input regarding a tuple of classes. After finding the correct class the algorithm would then take that class as another input and tuple it with a class, which has not been used yet.
+\item Another possibility is to use two layered Perceptron classifiers to classify the input regarding a tuple of classes. After finding the correct class the algorithm would then take that class as another input and tuple it with a class, which has not been used yet.
 As soon as all classes are processed by the algorithm the last correct class would be the one where the input would be most likely in.
+\end{enumeration}
+
+\item Another option are $2^n$ classifiers, one for every pair of classes. The algorithm would then return every class out of the tuple in which the input lies. The union over all returned classes would then suffice for a correct classification.
+
 \end{enumeration}
 
 
