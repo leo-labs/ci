@@ -2,9 +2,10 @@ last <- function(x) { tail(x, n = 1) }
 
 Perceptron<-function(path,maxInit){
   
-  if(maxInit <= 0)
+  if(maxInit <= 0){
     print("Only positive maximal Iterations allowed")
     return(maxInit)
+  }
   #Read File from Path as Matrix
   print("Intiliazing Matrix and Data please wait...")
   trainingData <-as.matrix(read.table(path))
