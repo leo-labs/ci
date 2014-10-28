@@ -21,10 +21,17 @@
 \begin{document}
 \maketitle
 
+\section{Exercise 1.1: McCulloch-Pitts Neural Net}
+\item a) A two layered McCulloch-Pitts Neural Net is sufficient to model the given boolean function $f(x) = \bar x_1 \bar x_2 \bar x_3 \vee  x_1 x_2 \vee x_2 x_3 $ . Each conjunction is modelled by a neuron, which only fires if all three
+inputs are active. The disjunction neuron fires as soon as one conjunction neuron fires. See Attachment 1
+
+\item b) As seen in a) it is sufficient to use as two layered McCulloch-Pitts Neural Net to model the given boolean function g(x). 
+The $\wedge$ binds stronger than the $\vee$ and therefore $g(x)$ is equivalent to $g(x) = x_1 x_2_x_3 \vee  x_1 x_2 \bar x_4\vee x_1 x_4 \bar x_2 $. See Attachment 2
+
 \section{Exercise 1.2: Perceptron Classifier}
 
 Apparently the given quadrangle is convex. So one can calculate the weight vectors $\vec{w_1},\vec{w_2},\vec{w_3},\vec{w_4}$ by deriving the four hyper planes.
-It is easy to get the hyperplanes in the form $\vec{x} = \vec{p} + r \vec{q}$ with $\vec{x},\vec{p},\vec{q} \in R^2 ~r \in R$. This form is equivalent to the normalform $(\vec{x}-\vec{p})~\vec{n} = 0$ with normal vector $\vec{n}$, which can also be written as $\vec{x} ~ \vec{n} = \vec{p} ~ \vec{n}$ and is almost what we want. \\
+It is easy to get the hyperplanes in the form $\vec{x} = \vec{p} + r \vec{q}$ with $\vec{x},\vec{p},\vec{q} \in R^2 ~r \in R$. This form is equivalent to the normalform $(\vec{x}-\vec{p})~\vec{n} = 0$ with normal vector $\vec{n}$, which can also be written as $\vec{x} ~ \vec{n} = \vec{p} ~ \vec{n}$ and is almost what we want. See Attachment 3 for the Quadrangle and Attachment 4 for the constructed net.\\
 We now will calculate the four hyperplanes $H_{ab}$, $H_{bc}$, $H_{cd}$ and $H_{da}$ : \\
 \begin{align*}
 H_{ab}&: \vec{x} = \vec{a} + r (\vec{b}-\vec{a}) = \colvec{1}{1} + r \left(\colvec{2}{-2} - \colvec{1}{1}\right) = \colvec{1}{1} + r \colvec{-1}{-3} \\
@@ -45,12 +52,12 @@ Because $(0,0)$ is inside the qudrangle, we can use that to get the inequalities
 2 x_2 &\le 2 \\
 \end{align*}
 
-\section{Exercise 1.3: Perceptron learning Algorithm}
+\section{Exercise 1.3: Perceptron Learning}
 
-As on can see in fig. 3 to 5 the perceptron learning algorithm correctly classifies only the third data set displayed in fig. 5. 
+As on can see in Figures 1 to 3 the perceptron learning algorithm correctly classifies only the third data set displayed in Figure 3. 
 It shows that a singe layer perceptron learning algorithm can not classify every set correctly in such way that the algorithm terminates for given condition that every example must be classified correctly.
 In fig. 3 one can see that precision and recall are close to 1 meaning that nearly all examples are classified correctly. Only a few false classified examples remain. This leads to the conclusion that the seperating hyperplane for the whole set can not be constructed.
-A small error remains in every iteration of the algorithm. In fig. 4 the precision rate drops drastically compared to fig.3 and 5. which induces a greater error. Finally the algorithm managed to determinate a weight vector to seperate the whole data set.
+A small error remains in every iteration of the algorithm. In figure 2 the precision rate drops drastically compared to figure 1 and 3. which induces a greater error. Finally the algorithm managed to determinate a weight vector to seperate the whole data set.
 Since every example is correctly classified there are no more errors and thus precision and recall converge to 1.
 
 \begin{figure}[ht]
@@ -81,9 +88,11 @@ Since every example is correctly classified there are no more errors and thus pr
 
 \section{Exercise 1.4: Classification into more than two classes}
 \begin{enumeration}
-\item On option could be, to train for $n$ classes $n$ ANN's: Every ANN classifies if the input is in class $n$ or not. -TODO \\
-\item ANother option are $2^n$ classifiers, one for every pair of classes. -TODO
+\item On option could be, to train for $n$ classes $n$ ANN's: Every ANN classifies if the input is in class $n$ or not. Basically one would iterate over the power set of the classes and pick the set where the input is in all classes.
+Furthermore one would test if there is more than one set meeting this condition. The algorithm would return the set with the most classes in it.
 
+\item Another possibility is to use two layered perceptron classifiers to classify the input regarding a tuple of classes. After finding the correct class the algorithm would then take that class as another input and tuple it with a class, which has not been used yet.
+As soon as all classes are processed by the algorithm the last correct class would be the one where the input would be most likely in.
 \end{enumeration}
 
 
