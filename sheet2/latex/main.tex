@@ -23,6 +23,7 @@
 
 \section{Exercise 2.2: Weights for RBF}
 
+a)
 \begin{align*}
   min \left\{ || P w-y ||^2\right\} &\\
  \Leftrightarrow  \frac{\partial}{\partial w} \left( (P w-y)^T (P w-y)\right) & = 0 \\
@@ -35,5 +36,15 @@
  \Leftrightarrow  P^T P w & = P^T y \\
  \Leftrightarrow w & = (P^T P)^{-1} P^T y
 \end{align*}
+b)
 
+
+b)
+\begin{align*}
+      min \left\{ || P w-y ||^2 + w^T D w \right\} &\\
+     \Leftrightarrow  \frac{\partial}{\partial w} \left(|| P w-y ||^2 + w^T D w\right) & = 0 \\
+     \Leftrightarrow  2 P^T P w - 2 P^T y + 2 D w & = 0 \\
+     \Leftrightarrow  P^T P w - P^T y + D w& = 0 \\
+     \Leftrightarrow w & = (P^T P + D)^{-1} P^T y
+\end{align*}
 \end{document}
