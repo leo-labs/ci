@@ -6,10 +6,13 @@
 RBF <- function (r,sigma){
   result = exp(-r^2/sigma^2)
 }
-
-RBFnet <- function(data,neurons,sigma){
+###
+#Radial Basis Functio Net
+#Computes Weight Vector to given number of Neurons , Input and Output and some constant Sigma 
+###
+RBFnet <- function(path,neurons,sigma){
   
-  readdata = read.table(data)
+  readdata = read.table(path)
   input <- readdata[,1]
   output <- readdata[,2]
   centroidsX <- c()
@@ -30,7 +33,7 @@ RBFnet <- function(data,neurons,sigma){
       matrix[i,k] <- RBF(abs(input[i]-centroidsX[k]),sigma)
     }
   }
-
+  
   print(ncol(matrix))
   print(nrow(matrix))
   ###
@@ -42,7 +45,7 @@ RBFnet <- function(data,neurons,sigma){
   }
   ###
   #case N < q
-  ###
+  ###1
   if(ncol(matrix) > nrow(matrix)){
     print("This Matrix has many solutions and therefore is of no practical use")
     return()
@@ -59,6 +62,9 @@ RBFnet <- function(data,neurons,sigma){
     print(det(temp))
     result <- (solve(t(matrix)%*%matrix)%*%t(matrix))%*%output
   }
+  
+  yval <- rep(0,length(result))
+  plot(result,yval,xlim=c(-300,300),ylim=c(-300,300))
   return (result)
 }
 
@@ -79,7 +85,7 @@ SOMTrain <- function(n){
   #
   ###
   sthing <- som(m, n*2, n)
-    
+  
   res <- sthing[[2]]
   plot(res)
   
@@ -95,9 +101,9 @@ SOMTrain <- function(n){
   #    if(res[i,j] >1)
   #      res[i,j] <- 1
   #  }
-    
-   
-    
+  
+  
+  
   
   return(res)
   

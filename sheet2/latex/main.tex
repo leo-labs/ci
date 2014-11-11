@@ -34,7 +34,8 @@ r = ||x-c_q||
 \end{align*}
 
 Choosing a high number of neurons relative to given inputs results in a near zero determinant. This then results in the inability of R to solve the invert of the matrix. The same goes for any given $\sigma$ . Choosing a $\sigma$ close to zero or as a multiple of the number of inputs results in a very small determinant and therefore a weight vector, which exceeds the give interval of $\ [-300,300]$.
-
+To use the provided code load the functions into your R-Studio and call the function RBFnet with 3 arguments. For example to train a RBFN with $ q = 15$ Neurons and $\sigma = 30$ use the following syntax : 
+RBFnet("path/to/function1.txt",15,30)
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.5]{RBF.png}
