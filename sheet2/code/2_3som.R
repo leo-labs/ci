@@ -1,11 +1,7 @@
 library("som")
 
 randomData <- function() { 
-  a <- runif(100)
-  b <- runif(100)
-  c <- runif(100)
-  d <- runif(100)
-  m <- matrix(c(a,b,c,d),100)
+  m <- matrix(runif(400),100)
   return(m)
 }
 
