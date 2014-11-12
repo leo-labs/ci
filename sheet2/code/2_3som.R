@@ -5,7 +5,7 @@ randomData <- function() {
   return(m)
 }
 
-trainsom <- function(data, iterations, rad) {
+trainsom <- function(data, iterations, rad=NULL) {
   plot(0:27,0:27,type="n")
 
   map <- som(data, 10, 10, init="random", rlen=iterations, radius=rad)
