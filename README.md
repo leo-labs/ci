@@ -7,4 +7,7 @@ Click on the nice button above or [here](https://www.sharelatex.com/github/repos
 
 Just add ```% !TEX program = pdflatex``` to the head of the main .tex file!
 
-
+sheet No.  | points
+-----------| -------------
+1  | 16.5
+2  | 16
