@@ -7,10 +7,10 @@ poem <- function(x){
   return (-((x-0)*(x-1000))/(4*62500))
 }
 book <- function(x){
-  if(x >150000) return(1)
-  if(x <50000) return(0)
+  if(x >10000) return(1)
+  if(x <3500) return(0)
   else
-    return((x/100000)-0.5)
+    return((x/6500)-7/13)
 }
 
 child <- function(x){
@@ -23,10 +23,10 @@ child <- function(x){
 
 youngperson <- function(x){
   
-  if (x < 14) return(0)
+  if (x < 8) return(0)
   if (x > 30) return(0)
-  if(x <25) return((x/11)-14/11)
-  if(x >= 25) return(-(x/5)+6)
+  if(x <22) return((x/14)-4/7)
+  if(x >= 22) return(-(x/8)+15/4)
   
 }
 
@@ -91,7 +91,7 @@ plotPeople<-function(){
 }
 
 plotWords<-function(){
-  x <- seq(from=0,to=160000)
+  x <- seq(from=0,to=20000)
   y <- sapply(x,book)
   plot(x,y,type="l",xlab="Number of Words",col="red")
   x <- seq(from=500,to=5000)
@@ -134,11 +134,11 @@ intersection<-function(x,y){
 }
 
 plotComplementWords<-function(){
-  x <- seq(from=0,to=160000)
+  x <- seq(from=0,to=20000)
   y <- sapply(x,book)
   y <- sapply(y,complement)
   plot(x,y,type="l",xlab="Number of Words",col="red")
-  x <- seq(from=0,to=160000)
+  x <- seq(from=0,to=20000)
   y <- sapply(x,news)
   y <- sapply(y,complement)
   points(x,y,type="l",col="blue")
@@ -149,7 +149,7 @@ plotComplementAge<-function(){
   x <- seq(from=0,to=100)
   y <- sapply(x,child)
   y <- sapply(y,complement)
-  plot(x,y,type="l",xlab="Number of Words",col="red")
+  plot(x,y,type="l",xlab="Age",col="red")
   x <- seq(from=0,to=100)
   y <- sapply(x,youngperson)
   y <- sapply(y,complement)
@@ -158,7 +158,7 @@ plotComplementAge<-function(){
 }
 
 plotUnionWords<-function(){
-  x <- seq(from=0,to=160000)
+  x <- seq(from=0,to=20000)
   y <- sapply(x,book)
   z <- sapply(x,news)
   z <- mapply(union,y,z)
@@ -170,11 +170,11 @@ plotUnionAge<-function(){
   y <- sapply(x,child)
   z <- sapply(x,youngperson)
   z <- mapply(union,y,z)
-  plot(x,z,type="l",xlab="Number of Words",col="red")
+  plot(x,z,type="l",xlab="Age",col="red")
 }
 
 plotIntersectionWords<-function(){
-  x <- seq(from=0,to=160000)
+  x <- seq(from=0,to=20000)
   y <- sapply(x,book)
   z <- sapply(x,news)
   z <- mapply(intersection,y,z)
@@ -186,5 +186,5 @@ plotIntersectionAge<-function(){
   y <- sapply(x,child)
   z <- sapply(x,youngperson)
   z <- mapply(intersection,y,z)
-  plot(x,z,type="l",xlab="Number of Words",col="red")
+  plot(x,z,type="l",xlab="Age",col="red")
 }
