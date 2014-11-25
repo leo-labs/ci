@@ -1,4 +1,6 @@
 news <- function(x){
+  if(x < 500) return(0)
+  if(x > 5000) return(0)
   -((x-500)*(x-5000))/(4*1265625)
 }
 poem <- function(x){
@@ -117,4 +119,72 @@ plotAge<-function(){
   points(x,y,type="l",ylim=c(0,2),col="purple",xlab="crowd")
   
   
+}
+
+complement<-function(x){
+  return (1-x)
+}
+
+union<-function(x,y){
+  return(max(x,y))
+}
+
+intersection<-function(x,y){
+  return(min(x,y))
+}
+
+plotComplementWords<-function(){
+  x <- seq(from=0,to=160000)
+  y <- sapply(x,book)
+  y <- sapply(y,complement)
+  plot(x,y,type="l",xlab="Number of Words",col="red")
+  x <- seq(from=0,to=160000)
+  y <- sapply(x,news)
+  y <- sapply(y,complement)
+  points(x,y,type="l",col="blue")
+ 
+}
+
+plotComplementAge<-function(){
+  x <- seq(from=0,to=100)
+  y <- sapply(x,child)
+  y <- sapply(y,complement)
+  plot(x,y,type="l",xlab="Number of Words",col="red")
+  x <- seq(from=0,to=100)
+  y <- sapply(x,youngperson)
+  y <- sapply(y,complement)
+  points(x,y,type="l",col="blue")
+  
+}
+
+plotUnionWords<-function(){
+  x <- seq(from=0,to=160000)
+  y <- sapply(x,book)
+  z <- sapply(x,news)
+  z <- mapply(union,y,z)
+  plot(x,z,type="l",xlab="Number of Words",col="red")
+}
+
+plotUnionAge<-function(){
+  x <- seq(from=0,to=100)
+  y <- sapply(x,child)
+  z <- sapply(x,youngperson)
+  z <- mapply(union,y,z)
+  plot(x,z,type="l",xlab="Number of Words",col="red")
+}
+
+plotIntersectionWords<-function(){
+  x <- seq(from=0,to=160000)
+  y <- sapply(x,book)
+  z <- sapply(x,news)
+  z <- mapply(intersection,y,z)
+  plot(x,z,type="l",xlab="Number of Words",col="red")
+}
+
+plotIntersectionAge<-function(){
+  x <- seq(from=0,to=100)
+  y <- sapply(x,child)
+  z <- sapply(x,youngperson)
+  z <- mapply(intersection,y,z)
+  plot(x,z,type="l",xlab="Number of Words",col="red")
 }
