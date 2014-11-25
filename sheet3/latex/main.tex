@@ -5,6 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{dsfont}
+
 
 \graphicspath{ {img/} }
 
@@ -26,6 +28,20 @@
 \section{Exercise 3.1: Fuzzy Sets}
 
 \section{Exercise 3.2: Fuzzy Complements}
+As defined in lecture a fuzzy complement obtained from an arbitrary increasing generator is a function $c: [0,1] \to [0,1]$ where
+$\forall a \in [0,1]: c(a) = g^{(-1)}\left(g(1)-g(a)\right)$ and $\exists$ a continous function $g:[0,1] \to \mathds{R}$ with $g(0) = 0$ and $g$ strictly monotone increasing.
+
+To be proven: $\forall a \in [0,1]: c(c(a)) = a$ \\
+Because $g(0) = 0$, $g$ continuous and $g$ strictly monotone increasing, $g$ is bijective in [0,1] and the inverse function exists (in [0,1]).
+\begin{align*}
+        c(c(a)) &= c \left( g^{(-1)} \left( g(1) - g(a) \right) \right) \\
+                &= g^{(-1)} \left( g(1) - g \left( g^{(-1)} \left( g(1) - g(a) \right) \right) \right) \\
+                &= g^{(-1)} \left( g(1)-g(1)+g(a) \right) \\
+                &= g^{(-1)} \left( g(a) \right) \\
+                &= a 
+\end{align*}
+    
+\qed
 
 \section{Exercise 3.3: Dual Triples}
 
